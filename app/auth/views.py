@@ -25,20 +25,21 @@ def register():
 @auth.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
-    title = "Owner Login"
-
+    title = 'Writer login'
+ 
     if form.validate_on_submit():
         user_email = form.email.data
         user_password = form.password.data
+        remember = form.remember_me.data
 
-        user = User.query.filter_by(email = user.email).first
+        user = User.query.filter_by(email = user_email).first()
+
         if user is not None and user.verify_password(user_password):
-            flash("You have successfully logged in... write your posts")
-            return url_for('main.index')
-        flash("Invalid username or password")
-
-
+            login_user(user,remember)
+            return redirect(request.args.get('next') or url_for('main.index'))
+        flash("Invalid username or pasword")
     return render_template("auth/login.html", form = form , title = title)
+
 
 @auth.route('/logout')
 @login_required

@@ -9,7 +9,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 #Class for User/Writer
-class User(db.Model):
+class User(db.Model, UserMixin):
     '''
     Class to define Users
     '''

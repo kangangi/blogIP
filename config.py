@@ -4,6 +4,7 @@ class Config:
     General Configuration parent class
     '''
     SECRET_KEY = "Skylar"
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
 
 
 class ProdConfig(Config):
