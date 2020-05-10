@@ -5,6 +5,7 @@ class Config:
     '''
     SECRET_KEY = "Skylar"
     UPLOADED_PHOTOS_DEST ='app/static/photos'
+    QUOTES_API = "http://quotes.stormconsultancy.co.uk/random.json"
 
 
 class ProdConfig(Config):

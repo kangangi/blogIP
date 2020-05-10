@@ -4,6 +4,7 @@ from flask_login import login_required,current_user
 from app.models import User, Post, Comment
 from .forms import addPost, addComment
 from .. import db,photos
+from ..requests import get_quotes
 
 @main.route('/')
 def index():
@@ -11,9 +12,12 @@ def index():
     View root page function that returns index page
     '''
     title = "my blog"
-
+    quotes = get_quotes()
+    quote = quotes['quote']
+    author = quotes['author']
+    
     posts = Post.query.all()
-    return render_template('index.html', title = title, posts = posts)
+    return render_template('index.html', title = title, posts = posts, quote = quote ,author = author )
 
 
 @main.route('/posts/<post_id>' ,methods = ['GET', 'POST'])
