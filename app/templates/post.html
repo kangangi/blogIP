@@ -21,6 +21,9 @@
     <h3>Comments</h3>
     {%for comment in comments%}
     <li>{{comment.content}}</li>
+    {% if current_user.is_authenticated %}
+    <button class= "btn btn-outline-danger"><a href="{{url_for('main.delete_comment', comment_id = comment.id)}}"> Delete </a></button>
+    {% endif %}
     {% endfor %}
 
 

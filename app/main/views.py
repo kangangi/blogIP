@@ -65,6 +65,22 @@ def add_post(uname):
 
     return render_template('addpost.html', form = form, title = title )
 
+@main.route('/delete/<comment_id>')
+@login_required
+def delete_comment(comment_id):
+    
+    comment = Comment.query.filter_by(id = comment_id).first()
+    post_id = comment.post_id
+    print("-"*50
+    )
+    print(post_id)
+   
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    return redirect(url_for('main.post', post_id = post_id))
+
 @main.route('/delete/<post_id>')
 @login_required
 def delete_post(post_id):
@@ -74,3 +90,4 @@ def delete_post(post_id):
     db.session.commit()
 
     return redirect(url_for('main.index'))
+
