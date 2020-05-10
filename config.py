@@ -3,7 +3,7 @@ class Config:
     '''
     General Configuration parent class
     '''
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = "Skylar"
 
 
 class ProdConfig(Config):
