@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="container">
+    {{post.title}}
+    {{post.content}}
+
+    <h3>Add comment </h3>
+    <form class = "form-group" method = "POST" enctype="multipart/form-data"> 
+        {{form.hidden_tag()}}
+        {{form.content.label}}
+        {{form.content(class = "form-control",style="margin-bottom: 10px;")}}
+        {{form.submit(class = "btn btn-outline-info")}} 
+    </form>
+
+    <h3>Comments</h3>
+    {%for comment in comments%}
+    <li>{{comment.content}}</li>
+    {% endfor %}
+
+
+</div>
+{% endblock %}

@@ -6,6 +6,8 @@
     <h3>Posts</h3>
     {% for post in posts %}
     <li>{{post.title }}</li>
+    <!--<img src="{{url_for('static',filename=post.image_url)}}" alt="">-->
+    <button><a href="{{url_for('main.post', post_id = post.id)}}"> View Post </a></button>
     {% endfor %}
 </div>
 {% endblock %}
