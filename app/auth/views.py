@@ -18,6 +18,7 @@ def login():
             flash("You have successfully logged in... write your posts")
             return url_for('main.index')
         flash("Invalid username or password")
+        
 
     return render_template("auth/login.html", form = form , title = title)
 
