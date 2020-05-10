@@ -2,7 +2,7 @@ from flask import render_template, request,redirect, url_for,abort
 from . import main
 from flask_login import login_required,current_user
 from app.models import User, Post, Comment
-from .forms import addPost, addComment
+from .forms import addPost, addComment,updatePost
 from .. import db,photos
 from ..requests import get_quotes
 
@@ -64,6 +64,34 @@ def add_post(uname):
         return redirect(url_for('main.index'))
 
     return render_template('addpost.html', form = form, title = title )
+
+@main.route('/update/<post_id>', methods = ['GET', 'POST'])
+@login_required
+def update_post(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    post_id = post.id
+
+    if post is None:
+        abort(404)
+
+    form = updatePost()
+    if form.validate_on_submit():
+        post.content = form.content.data
+        '''if "post_photo" in request.files:
+            pic = photos.save(request.files["post_photo"])
+            path =f"photos/{pic}"
+            post.image_url = path'''
+
+        db.session.add(post)
+        db.session.commit()
+
+        return redirect(url_for('main.post' ,post_id = post_id))
+    
+    return render_template('updatepost.html', form = form)
+
+
+
+
 
 @main.route('/delete/<comment_id>')
 @login_required
