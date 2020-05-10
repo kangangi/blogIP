@@ -15,3 +15,7 @@ class addComment(FlaskForm):
 class updatePost(FlaskForm):
     content = TextAreaField("Change post",validators=[Required()])
     submit = SubmitField("Update post")
+
+class updateProfile(FlaskForm):
+    bio = TextAreaField("Tell us about you.", validators=[Required()])
+    submit = SubmitField("Submit Bio")

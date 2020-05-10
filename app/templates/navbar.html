@@ -13,9 +13,9 @@
                 <li><a href="/">HOME</a></li>
 
                 {% if current_user.is_authenticated %}
-                {{current_user.fullname}}
                 <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
                 <li><a href="{{url_for('main.add_post',uname = current_user.username)}}">Add Post</a></li>
+                <li><a href="{{url_for('main.profile',uname = current_user.username)}}">Profile</a></li>
                 {% else %}
                 <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
                 {%endif%}
