@@ -65,3 +65,12 @@ def add_post(uname):
 
     return render_template('addpost.html', form = form, title = title )
 
+@main.route('/delete/<post_id>')
+@login_required
+def delete_post(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(url_for('main.index'))
