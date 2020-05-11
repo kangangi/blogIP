@@ -1,4 +1,25 @@
-<div class="navbar navbar-inverse" role="navigation" style>
+<nav class="navbar navbar-light bg-light">
+
+
+    <ul class="nav navbar-nav">
+        <li><a class="navbar-brand" href="/"> La VIE </a></li>
+        <li><a href="/">Home</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('main.add_post',uname = current_user.username)}}">Add Post</a></li>
+        <li><a href="{{url_for('main.profile',uname = current_user.username)}}">Profile</a></li>
+        <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
+
+        {% else %}
+        <li><a href="{{url_for('auth.login')}}">Login</a></li>
+        {%endif%}
+    </ul>
+
+
+
+</nav>
+
+
+<!--<div  id = class="navbar navbar-inverse" role="navigation" style>
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,4 +43,4 @@
             </ul>
         </div>
     </div>
-</div>
+</div>-->

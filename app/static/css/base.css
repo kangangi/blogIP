@@ -1,0 +1,19 @@
+body{
+    background-color: #f7ede2;
+    color :black;
+} 
+
+.navbar {
+    font-family: 'Arvo', serif;
+    background-color: #F5CAC3;
+}
+
+.navbar a{
+    color: #84A59D
+}
+
+.navbar-brand{
+    font-family: 'Unkempt', cursive;
+    font-size: 30px;
+    font-weight: bold;
+}
