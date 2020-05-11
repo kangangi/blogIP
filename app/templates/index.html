@@ -40,7 +40,6 @@
             <img class="card-img-top" src="{{url_for('static',filename=post.image_url)}}" alt="post image">
             <div class="card-body">
                 <h5 class="card-title">{{post.title}}</h5>
-                <p class="card-text"><small class="text-muted">{{post.date}}</small></p>
                 <button  id ="button"class ="btn btn-outline-info"><a href="{{url_for('main.post', post_id = post.id)}}"> View Post </a></button>
             </div>
         </div>
