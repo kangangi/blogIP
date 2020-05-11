@@ -19,3 +19,7 @@ class updatePost(FlaskForm):
 class updateProfile(FlaskForm):
     bio = TextAreaField("Tell us about you.", validators=[Required()])
     submit = SubmitField("Submit Bio")
+
+class mailListForm(FlaskForm):
+    email = StringField("Enter email to get updates whenever new posts are made", validators= [Required()])
+    submit = SubmitField("Subcribe")

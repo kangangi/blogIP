@@ -1,12 +1,13 @@
 from flask import render_template, request,redirect, url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from app.models import User, Post, Comment
-from .forms import addPost, addComment,updatePost,updateProfile
+from app.models import User, Post, Comment, MailList
+from .forms import addPost, addComment,updatePost,updateProfile, mailListForm
 from .. import db,photos
 from ..requests import get_quotes
+from app.email import mail_message
 
-@main.route('/')
+@main.route('/',methods =['GET','POST'])
 def index():
     '''
     View root page function that returns index page
@@ -15,9 +16,18 @@ def index():
     quotes = get_quotes()
     quote = quotes['quote']
     author = quotes['author']
+
+    form = mailListForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        new_mail = MailList(email = email)
+
+        db.session.add(new_mail)
+        db.session.commit()
+        return redirect(url_for('main.index'))
     
     posts = Post.query.all()
-    return render_template('index.html', title = title, posts = posts, quote = quote ,author = author )
+    return render_template('index.html', title = title, posts = posts, quote = quote ,author = author , form = form )
 
 
 @main.route('/posts/<post_id>' ,methods = ['GET', 'POST'])
@@ -60,6 +70,12 @@ def add_post(uname):
 
         new_post = Post(title = title, content = content, user = user, image_url = image_url)
         new_post.save_post()
+        maillist = MailList.query.all()
+        mails = []
+        for mail in maillist:
+            mails.append(mail.email)
+        for mail in mails:
+            mail_message("Update!","email/update", mail, user = current_user)
 
         return redirect(url_for('main.index'))
 
@@ -89,8 +105,15 @@ def update_post(post_id):
     
     return render_template('updatepost.html', form = form)
 
+@main.route('/delete/<id>')
+@login_required
+def delete_post(id):
+    post = Post.query.filter_by(id=id).first()
 
+    db.session.delete(post)
+    db.session.commit()
 
+    return redirect(url_for('main.index'))
 
 
 @main.route('/delete/<comment_id>')
@@ -109,15 +132,6 @@ def delete_comment(comment_id):
 
     return redirect(url_for('main.post', post_id = post_id))
 
-@main.route('/delete/<post_id>')
-@login_required
-def delete_post(post_id):
-    post = Post.query.filter_by(id=post_id).first()
-
-    db.session.delete(post)
-    db.session.commit()
-
-    return redirect(url_for('main.index'))
 
 @main.route('/user/<uname>')
 def profile(uname):

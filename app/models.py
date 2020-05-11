@@ -88,9 +88,16 @@ class Comment(db.Model):
         comments = Comment.query.filter_by(post_id = id).all()
         return comments
 
-    ##def __repr__(self):
-    ##    return f"comment {self.content}"
- 
+    
+class MailList(db.Model):
+    __tablename__ = "maillist"
+    
+    id = db.Column(db.Integer,primary_key =True)
+    email = db.Column(db.String) 
+
+    def save_mail(self):
+        db.session.add(self)
+        db.session.commit()
 
 
     
