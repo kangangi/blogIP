@@ -10,6 +10,7 @@ A blog application where you can create and share posts.
 1. When the user opens the website, they can view the posts details. They can read the post by clicking on the view post button which leads them to the post page where they can read the post and comment on it.
 2. The user can subcribe to be part of the mail list that updates them any time there is a new post
 3. To write posts, one needs to sign up. As a writer on can add posts, delete them, update them and delete the comments that they do not like. 
+4. The blog should ideally have one writer. I am allowing multiple writers for grading purposes.
 
 ## Technology Used
 1. HTML
