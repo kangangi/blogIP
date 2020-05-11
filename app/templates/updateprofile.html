@@ -12,7 +12,11 @@
 
     </form>
 
-    
+    <form action="{{url_for('main.update_pic',uname = current_user.username)}}" method="post" enctype="multipart/form-data">
+        <label id="label"> Edit Profile Pic</label>
+        <input type="file" name="photo" class="form-control" required>
+        <input type="submit" class="btn btn-outline-info">
+    </form>
 
 </div>
 

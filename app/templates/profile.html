@@ -4,7 +4,9 @@
 <div class="container">
 
     {{user.fullname}}
-
+    {{user.bio}}
+    <img src="{{url_for('static',filename=user.profile_pic_url)}}" alt="" class="img-thumbnail">
+        
     <button class= "btn btn-outline-danger"><a href="{{url_for('main.update_profile', uname = current_user.username)}}"> Update </a></button>
 
 </div>
