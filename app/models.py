@@ -60,11 +60,6 @@ class Post(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_user_post(cls,id):
-        user_posts = Post.query.filter_by(user_id = id).all()
-        return user_posts
-
     def __repr__(self):
         return f"Post {self.title}"
 
